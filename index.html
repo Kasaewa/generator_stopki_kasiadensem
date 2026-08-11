@@ -109,7 +109,7 @@
     <label for="imie">Imię i nazwisko</label>
     <input type="text" id="imie" list="imieList" placeholder="Wpisz lub wybierz">
     <datalist id="imieList">
-      <option value="Julia ">
+      <option value="Julia">
       <option value="Justyna">
       <option value="Natalia">
       <option value="Kasia Densem">
@@ -160,23 +160,62 @@
 </div>
 
 <script>
-// Lista dostępnych banerów — żeby dodać kolejny, wystarczy dopisać obiekt niżej.
-// value = nazwa pliku w folderze img/ na GitHubie, label = nazwa widoczna w liście wyboru.
-// link = adres, do którego ma prowadzić kliknięcie w baner.
-const bannerOptions = [
-  { value: '', label: 'Brak banera', link: '' },
-  { value: 'baner_sierpien.jpg', label: 'Sierpień', link: 'https://manufakturakrolowej.pl' },
-  { value: 'baner_urodziny.png', label: 'Urodziny', link: 'https://manufakturakrolowej.pl' }
+// ====== KONFIGURACJA REPO — UZUPEŁNIJ SWOIMI DANYMI ======
+const GITHUB_CONFIG = {
+  owner: 'kasaewa',   // np. 'kasiadensem'
+  repo:  'publish`',                // np. 'Stopka_kasiadensem'
+  branch: 'main',
+  folder: 'img'
+};
+// ===========================================================
+
+// Lista zapasowa — używana tylko, jeśli powyższy konfig nie jest uzupełniony
+// albo pobranie listy z GitHuba się nie uda (np. brak internetu, zła nazwa repo).
+const fallbackBannerOptions = [
+  { value: 'stopka_sierpien.jpg', label: 'Sierpień', link: 'https://manufakturakrolowej.pl' },
+  { value: 'stopka_urodziny.jpg', label: 'Urodziny', link: 'https://manufakturakrolowej.pl' }
 ];
 
-function populateBannerSelect() {
+let bannerOptions = [{ value: '', label: 'Brak banera', link: '', src: '' }];
+
+async function fetchBannerListFromGitHub() {
+  if (GITHUB_CONFIG.owner === 'TWOJA_NAZWA_UZYTKOWNIKA' || GITHUB_CONFIG.repo === 'NAZWA_REPO') {
+    return null; // konfig nieuzupełniony — nie ma sensu próbować
+  }
+  try {
+    const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.folder}?ref=${GITHUB_CONFIG.branch}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('GitHub API error ' + res.status);
+    const data = await res.json();
+    const imageExt = /\.(jpg|jpeg|png|gif|webp)$/i;
+    return data
+      .filter(item => item.type === 'file' && imageExt.test(item.name))
+      .map(f => ({
+        value: f.name,
+        label: f.name.replace(/\.[^.]+$/, '').replace(/[_-]/g, ' '),
+        link: 'https://manufakturakrolowej.pl',
+        src: f.download_url // gotowy, bezwzględny link — działa też w mailach
+      }));
+  } catch (e) {
+    console.warn('Nie udało się pobrać listy banerów z GitHub, używam listy zapasowej:', e);
+    return null;
+  }
+}
+
+async function populateBannerSelect() {
+  const fetched = await fetchBannerListFromGitHub();
+  const dynamiczne = (fetched && fetched.length) ? fetched : fallbackBannerOptions;
+  bannerOptions = [{ value: '', label: 'Brak banera', link: '', src: '' }, ...dynamiczne];
+
   const select = document.getElementById('banerSelect');
+  select.innerHTML = '';
   bannerOptions.forEach(opt => {
     const el = document.createElement('option');
     el.value = opt.value;
     el.textContent = opt.label;
     select.appendChild(el);
   });
+  updatePreview();
 }
 
 function escapeHtml(str) {
@@ -222,7 +261,7 @@ function buildHtml() {
 
             <a href="${banerData ? banerData.link : ''}">
 
-                <img src="img/${banerData ? banerData.value : ''}"
+                <img src="${banerData ? (banerData.src || 'img/' + banerData.value) : ''}"
                      width="600"
                      alt="Baner"
                      style="display:block;border:1px solid;border-color:#B38E43;max-width:600px;width:100%;">
