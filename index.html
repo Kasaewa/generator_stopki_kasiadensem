@@ -68,20 +68,6 @@
     color: #999;
     margin-top: 3px;
   }
-  button#copyBtn {
-    margin-top: 22px;
-    width: 100%;
-    padding: 12px;
-    background: #0D4037;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  button#copyBtn:hover { background: #123f34; }
-  button#copyBtn.copied { background: #2e7d32; }
   .preview-title {
     font-size: 13px;
     font-weight: 600;
@@ -100,7 +86,7 @@
 <body>
 
 <h1>Generator stopki e-mail</h1>
-<div class="sub">Manufaktura Królowej — uzupełnij dane i skopiuj gotowy kod HTML do klienta poczty</div>
+<div class="sub">Manufaktura Królowej — uzupełnij dane, skopiuj gotowy podpis z podglądu</div>
 
 <div class="wrapper">
 
@@ -109,10 +95,12 @@
     <label for="imie">Imię i nazwisko</label>
     <input type="text" id="imie" list="imieList" placeholder="Wpisz lub wybierz">
     <datalist id="imieList">
+      <option value="Kasia Densem">
       <option value="Julia Semenovska">
       <option value="Justyna Psujek">
       <option value="Natalia Kępczyńska">
-      <option value="Kasia Densem">
+      <option value="Karolina Zielińska">
+      <option value="Karol Mika">
     </datalist>
 
     <label for="stanowisko">Stanowisko</label>
@@ -152,14 +140,14 @@
 </div>
 
 <script>
-// ====== KONFIGURACJA REPO — UZUPEŁNIJ SWOIMI DANYMI ======
+// ====== KONFIGURACJA REPO ======
 const GITHUB_CONFIG = {
-  owner: 'Kasaewa',   // np. 'kasiadensem'
-  repo:  'generator_stopki_kasiadensem',                // np. 'Stopka_kasiadensem'
+  owner: 'Kasaewa',
+  repo:  'generator_stopki_kasiadensem',
   branch: 'main',
   folder: 'img'
 };
-// ===========================================================
+// ===============================
 
 // Lista zapasowa — używana tylko, jeśli powyższy konfig nie jest uzupełniony
 // albo pobranie listy z GitHuba się nie uda (np. brak internetu, zła nazwa repo).
@@ -172,7 +160,7 @@ let bannerOptions = [{ value: '', label: 'Brak banera', link: '', src: '' }];
 
 async function fetchBannerListFromGitHub() {
   if (GITHUB_CONFIG.owner === 'TWOJA_NAZWA_UZYTKOWNIKA' || GITHUB_CONFIG.repo === 'NAZWA_REPO') {
-    return null; // konfig nieuzupełniony — nie ma sensu próbować
+    return null;
   }
   try {
     const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.folder}?ref=${GITHUB_CONFIG.branch}`;
@@ -186,7 +174,7 @@ async function fetchBannerListFromGitHub() {
         value: f.name,
         label: f.name.replace(/\.[^.]+$/, '').replace(/[_-]/g, ' '),
         link: 'https://manufakturakrolowej.pl',
-        src: f.download_url // gotowy, bezwzględny link — działa też w mailach
+        src: f.download_url
       }));
   } catch (e) {
     console.warn('Nie udało się pobrać listy banerów z GitHub, używam listy zapasowej:', e);
@@ -387,7 +375,6 @@ ${telefonBlock}
 function updatePreview() {
   const html = buildHtml();
   document.getElementById('preview').srcdoc = html;
-  document.getElementById('codeBox').value = html;
 }
 
 document.querySelectorAll('input').forEach(el => {
@@ -400,13 +387,6 @@ document.getElementById('brakTelefonu').addEventListener('change', function() {
 });
 
 document.getElementById('banerSelect').addEventListener('change', updatePreview);
-
-document.getElementById('codeBox').addEventListener('click', function() {
-  this.select();
-});
-document.getElementById('codeBox').addEventListener('focus', function() {
-  this.select();
-});
 
 populateBannerSelect();
 updatePreview();
