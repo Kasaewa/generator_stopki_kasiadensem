@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Generator stopki - Manufaktura Królowej</title>
+
 <style>
   * { box-sizing: border-box; }
+
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     margin: 0;
@@ -12,23 +14,38 @@
     background: #f4f1ec;
     color: #0D4037;
   }
-  h1 { font-size: 20px; margin: 0 0 4px; }
-  .sub { color: #6b6b6b; font-size: 13px; margin-bottom: 24px; }
+
+  h1 {
+    font-size: 20px;
+    margin: 0 0 4px;
+  }
+
+  .sub {
+    color: #6b6b6b;
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+
   .wrapper {
     display: grid;
     grid-template-columns: 340px 1fr;
     gap: 24px;
     align-items: start;
   }
+
   @media (max-width: 900px) {
-    .wrapper { grid-template-columns: 1fr; }
+    .wrapper {
+      grid-template-columns: 1fr;
+    }
   }
+
   .panel {
     background: #fff;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.08);
   }
+
   label {
     display: block;
     font-size: 13px;
@@ -36,7 +53,11 @@
     margin: 14px 0 4px;
     color: #333;
   }
-  label:first-of-type { margin-top: 0; }
+
+  label:first-of-type {
+    margin-top: 0;
+  }
+
   input[type="text"] {
     width: 100%;
     padding: 8px 10px;
@@ -44,36 +65,53 @@
     border-radius: 6px;
     font-size: 14px;
   }
+
   .email-row {
     display: flex;
     align-items: center;
     gap: 4px;
   }
-  .email-row input { flex: 1; }
+
+  .email-row input {
+    flex: 1;
+  }
+
   .email-row span {
     font-size: 14px;
     color: #555;
     white-space: nowrap;
   }
+
   .checkbox-row {
     display: flex;
     align-items: center;
     gap: 8px;
     margin-top: 14px;
   }
-  .checkbox-row label { margin: 0; font-weight: 600; }
-  .checkbox-row input { width: 16px; height: 16px; }
+
+  .checkbox-row label {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .checkbox-row input {
+    width: 16px;
+    height: 16px;
+  }
+
   .hint {
     font-size: 11px;
     color: #999;
     margin-top: 3px;
   }
+
   .preview-title {
     font-size: 13px;
     font-weight: 600;
     color: #333;
     margin-bottom: 10px;
   }
+
   iframe {
     width: 100%;
     height: 620px;
@@ -83,17 +121,28 @@
   }
 </style>
 </head>
+
 <body>
 
 <h1>Generator stopki e-mail</h1>
-<div class="sub">Manufaktura Królowej — uzupełnij dane, skopiuj gotowy podpis z podglądu</div>
+
+<div class="sub">
+  Manufaktura Królowej — uzupełnij dane, skopiuj gotowy podpis z podglądu
+</div>
 
 <div class="wrapper">
 
   <div class="panel">
 
     <label for="imie">Imię i nazwisko</label>
-    <input type="text" id="imie" list="imieList" placeholder="Wpisz lub wybierz">
+
+    <input
+      type="text"
+      id="imie"
+      list="imieList"
+      placeholder="Wpisz lub wybierz"
+    >
+
     <datalist id="imieList">
       <option value="Kasia Densem">
       <option value="Julia Semenovska">
@@ -103,8 +152,16 @@
       <option value="Karol Mika">
     </datalist>
 
+
     <label for="stanowisko">Stanowisko</label>
-    <input type="text" id="stanowisko" list="stanowiskoList" placeholder="Wpisz lub wybierz">
+
+    <input
+      type="text"
+      id="stanowisko"
+      list="stanowiskoList"
+      placeholder="Wpisz lub wybierz"
+    >
+
     <datalist id="stanowiskoList">
       <option value="Specjalista ds. e-commerce">
       <option value="Obsługa klienta">
@@ -112,284 +169,601 @@
       <option value="Marketing">
     </datalist>
 
+
     <div class="checkbox-row">
       <input type="checkbox" id="brakTelefonu">
       <label for="brakTelefonu">Brak numeru telefonu</label>
     </div>
 
+
     <label for="telefon">Numer telefonu</label>
-    <input type="text" id="telefon" placeholder="+48 123 456 789" value="+48 123 456 789">
+
+    <input
+      type="text"
+      id="telefon"
+      placeholder="+48 123 456 789"
+      value="+48 123 456 789"
+    >
+
 
     <label for="email">Adres e-mail</label>
+
     <div class="email-row">
-      <input type="text" id="email" placeholder="imie" value="imie">
+      <input
+        type="text"
+        id="email"
+        placeholder="imie"
+        value="imie"
+      >
+
       <span>@kasiadensem.pl</span>
     </div>
-    <div class="hint">Wpisz tylko część przed @ — reszta jest stała</div>
+
+    <div class="hint">
+      Wpisz tylko część przed @ — reszta jest stała
+    </div>
+
 
     <label for="banerSelect">Baner</label>
-    <select id="banerSelect" style="width:100%;padding:8px 10px;border:1px solid #ccc;border-radius:6px;font-size:14px;">
+
+    <select
+      id="banerSelect"
+      style="width:100%;padding:8px 10px;border:1px solid #ccc;border-radius:6px;font-size:14px;"
+    >
     </select>
 
   </div>
 
+
   <div class="panel">
-    <div class="preview-title">Podgląd na żywo</div>
+
+    <div class="preview-title">
+      Podgląd na żywo
+    </div>
+
     <iframe id="preview"></iframe>
+
   </div>
+
 </div>
 
+
 <script>
+
 // ====== KONFIGURACJA REPO ======
+
 const GITHUB_CONFIG = {
   owner: 'Kasaewa',
-  repo:  'generator_stopki_kasiadensem',
+  repo: 'generator_stopki_kasiadensem',
   branch: 'main',
   folder: 'img'
 };
+
 // ===============================
 
-// Lista zapasowa — używana tylko, jeśli powyższy konfig nie jest uzupełniony
-// albo pobranie listy z GitHuba się nie uda (np. brak internetu, zła nazwa repo).
-const fallbackBannerOptions = [
-  { value: 'stopka_sierpien.jpg', label: 'Sierpień', link: 'https://manufakturakrolowej.pl' },
-  { value: 'stopka_urodziny.jpg', label: 'Urodziny', link: 'https://manufakturakrolowej.pl' }
+
+let bannerOptions = [
+  {
+    value: '',
+    label: 'Brak banera',
+    link: '',
+    src: ''
+  }
 ];
 
-let bannerOptions = [{ value: '', label: 'Brak banera', link: '', src: '' }];
 
 async function fetchBannerListFromGitHub() {
-  if (GITHUB_CONFIG.owner === 'TWOJA_NAZWA_UZYTKOWNIKA' || GITHUB_CONFIG.repo === 'NAZWA_REPO') {
+
+  if (
+    GITHUB_CONFIG.owner === 'TWOJA_NAZWA_UZYTKOWNIKA' ||
+    GITHUB_CONFIG.repo === 'NAZWA_REPO'
+  ) {
     return null;
   }
+
   try {
-    const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.folder}?ref=${GITHUB_CONFIG.branch}`;
+
+    const url =
+      `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.folder}?ref=${GITHUB_CONFIG.branch}`;
+
     const res = await fetch(url);
-    if (!res.ok) throw new Error('GitHub API error ' + res.status);
+
+    if (!res.ok) {
+      throw new Error('GitHub API error ' + res.status);
+    }
+
     const data = await res.json();
+
     const imageExt = /\.(jpg|jpeg|png|gif|webp)$/i;
+
     return data
-      .filter(item => item.type === 'file' && imageExt.test(item.name))
+
+      .filter(
+        item =>
+          item.type === 'file' &&
+          imageExt.test(item.name)
+      )
+
       .map(f => ({
         value: f.name,
-        label: f.name.replace(/\.[^.]+$/, '').replace(/[_-]/g, ' '),
+
+        label: f.name
+          .replace(/\.[^.]+$/, '')
+          .replace(/[_-]/g, ' '),
+
         link: 'https://manufakturakrolowej.pl',
+
         src: f.download_url
       }));
+
   } catch (e) {
-    console.warn('Nie udało się pobrać listy banerów z GitHub, używam listy zapasowej:', e);
+
+    console.warn(
+      'Nie udało się pobrać listy banerów z GitHub:',
+      e
+    );
+
     return null;
   }
 }
 
-async function populateBannerSelect() {
-  const fetched = await fetchBannerListFromGitHub();
-  const dynamiczne = (fetched && fetched.length) ? fetched : fallbackBannerOptions;
-  bannerOptions = [{ value: '', label: 'Brak banera', link: '', src: '' }, ...dynamiczne];
 
-  const select = document.getElementById('banerSelect');
+async function populateBannerSelect() {
+
+  const fetched = await fetchBannerListFromGitHub();
+
+  const dynamiczne = fetched || [];
+
+  bannerOptions = [
+    {
+      value: '',
+      label: 'Brak banera',
+      link: '',
+      src: ''
+    },
+    ...dynamiczne
+  ];
+
+
+  const select =
+    document.getElementById('banerSelect');
+
   select.innerHTML = '';
+
+
   bannerOptions.forEach(opt => {
-    const el = document.createElement('option');
+
+    const el =
+      document.createElement('option');
+
     el.value = opt.value;
+
     el.textContent = opt.label;
+
     select.appendChild(el);
+
   });
+
+
   updatePreview();
 }
 
+
 function escapeHtml(str) {
+
   return str
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 }
 
+
 function buildHtml() {
-  const imie = escapeHtml(document.getElementById('imie').value.trim() || 'Imię Nazwisko');
-  const stanowisko = escapeHtml(document.getElementById('stanowisko').value.trim() || 'Stanowisko');
-  const brakTelefonu = document.getElementById('brakTelefonu').checked;
-  const telefon = document.getElementById('telefon').value.trim();
-  const telefonHref = telefon.replace(/[^+\d]/g, '');
-  const emailPrefix = escapeHtml(document.getElementById('email').value.trim() || 'kontakt');
-  const emailFull = emailPrefix + '@kasiadensem.pl';
-  const wybranyBaner = document.getElementById('banerSelect').value;
-  const banerData = bannerOptions.find(b => b.value === wybranyBaner);
-  const dodajBaner = !!wybranyBaner;
 
-  const telefonBlock = brakTelefonu ? '' : `
-                        <div style="padding-bottom:6px;">
-                            <a href="tel:${telefonHref}"
-                               style="color:#0D4037;text-decoration:none;">
-                                ${escapeHtml(telefon)}
-                            </a>
-                        </div>`;
+  const imie =
+    escapeHtml(
+      document.getElementById('imie').value.trim() ||
+      'Imię Nazwisko'
+    );
 
-  const banerBlock = dodajBaner ? `
 
-    <!-- Linia -->
+  const stanowisko =
+    escapeHtml(
+      document.getElementById('stanowisko').value.trim() ||
+      'Stanowisko'
+    );
 
-    <tr>
-        <td style="border-top:1px solid #B38E43;"></td>
-    </tr>
 
-    <!-- Baner -->
+  const brakTelefonu =
+    document.getElementById('brakTelefonu').checked;
 
-    <tr>
 
-        <td align="center" style="padding:18px 0;">
+  const telefon =
+    document.getElementById('telefon').value.trim();
 
-            <a href="${banerData ? banerData.link : ''}">
 
-                <img src="${banerData ? (banerData.src || 'img/' + banerData.value) : ''}"
-                     width="600"
-                     alt="Baner"
-                     style="display:block;border:1px solid;border-color:#B38E43;max-width:600px;width:100%;">
+  const telefonHref =
+    telefon.replace(/[^+\d]/g, '');
+
+
+  const emailPrefix =
+    escapeHtml(
+      document.getElementById('email').value.trim() ||
+      'kontakt'
+    );
+
+
+  const emailFull =
+    emailPrefix + '@kasiadensem.pl';
+
+
+  const wybranyBaner =
+    document.getElementById('banerSelect').value;
+
+
+  const banerData =
+    bannerOptions.find(
+      b => b.value === wybranyBaner
+    );
+
+
+  const dodajBaner =
+    !!wybranyBaner;
+
+
+  // ===== TELEFON =====
+
+  const telefonBlock =
+    brakTelefonu
+      ? ''
+      : `
+        <div style="padding-bottom:6px;">
+          <a
+            href="tel:${telefonHref}"
+            style="color:#0D4037;text-decoration:none;"
+          >
+            ${escapeHtml(telefon)}
+          </a>
+        </div>
+      `;
+
+
+  // ===== BANER =====
+
+  const banerBlock =
+    dodajBaner
+      ? `
+
+        <!-- Linia -->
+
+        <tr>
+          <td style="border-top:1px solid #B38E43;"></td>
+        </tr>
+
+
+        <!-- Baner -->
+
+        <tr>
+
+          <td
+            align="center"
+            style="padding:18px 0;"
+          >
+
+            <a
+              href="${banerData ? banerData.link : ''}"
+              target="_blank"
+            >
+
+              <img
+                src="${banerData ? (banerData.src || 'img/' + banerData.value) : ''}"
+                width="600"
+                alt="Baner"
+                style="display:block;border:1px solid;border-color:#B38E43;max-width:600px;width:100%;"
+              >
 
             </a>
 
-        </td>
+          </td>
 
-    </tr>` : '';
+        </tr>
+
+      `
+      : '';
+
 
   return `<!DOCTYPE html>
+
 <html>
-<body style="margin:0;padding:0;font-family:Outfit, sans-serif; font-size:14px; color:#0D4037;">
-<table cellpadding="0" cellspacing="0" border="0" width="700" style="border-collapse:collapse;">
 
-    <!-- Górna część -->
-    <tr>
-        <td style="padding:4px 0;">
+<body
+  style="margin:0;padding:0;font-family:Outfit, sans-serif;font-size:14px;color:#0D4037;"
+>
 
-            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+<table
+  cellpadding="0"
+  cellspacing="0"
+  border="0"
+  width="700"
+  style="border-collapse:collapse;"
+>
 
-                <tr>
 
-                    <!-- Dane pracownika -->
-                    <td width="60%" valign="top">
-                        <div style="font-size:16px;color:#0D4037">
-                            Pozdrawiam,
-                        </div>
-                        <div style="font-size:22px;font-weight:bold;color:#0D4037">
-                            ${imie}
-                        </div>
+  <!-- Górna część -->
 
-                        <div style="font-size:15px;color:#B38E43;padding-top:3px;padding-bottom:18px;">
-                            ${stanowisko}
-                        </div>
-${telefonBlock}
-                        <div style="padding-bottom:6px;">
-                            <a href="mailto:${emailFull}"
-                               style="color:#0D4037;text-decoration:none;">
-                                ${emailFull}
-                            </a>
-                        </div>
+  <tr>
 
-                        <div style="padding-bottom:15px;">
-                            <a href="https://kasiadensem.pl/"
-                               style="color:#0D4037; text-decoration:none;">
-                                www.kasiadensem.pl
-                            </a>
-                        </div>
+    <td style="padding:4px 0;">
 
-                        <div style="display:flex;align-items:center;gap:10px;">
+      <table
+        cellpadding="0"
+        cellspacing="0"
+        border="0"
+        width="100%"
+      >
 
-                            <a href="https://www.facebook.com/kasieniawyrwas"
-                               style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:4px;text-decoration:none;line-height:1;margin-right:10px;">
-                                <img src="https://kasiadensem.pl/wp-content/uploads/2026/08/facebook_tlo.png"
-                                    width="32"
-                                    height="32"
-                                    alt="Facebook"
-                                    style="display:block;border:0;border-radius:4px;">
-                            </a>
+        <tr>
 
-                            <a href="https://www.instagram.com/kasiadensem"
-                               style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:4px;text-decoration:none;line-height:1;margin-right:10px;">
-                                <img src="https://kasiadensem.pl/wp-content/uploads/2026/08/instagram_tlo.png"
-                                    width="32"
-                                    height="32"
-                                    alt="Instagram"
-                                    style="display:block;border:0;border-radius:4px;">
-                            </a>
 
-                            <a href="https://www.tiktok.com/@kasia.densem"
-                                style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:4px;text-decoration:none;line-height:1; margin-right:10px;">
-                                <img src="https://kasiadensem.pl/wp-content/uploads/2026/08/tiktok_tlo-1.png"
-                                    width="32"
-                                    height="32"
-                                    alt="TikTok"
-                                    style="display:block;border:0;border-radius:4px;">
-                            </a>
+          <!-- Dane pracownika -->
 
-                        </div>
+          <td
+            width="60%"
+            valign="top"
+          >
 
-                    </td>
+            <div
+              style="font-size:16px;color:#0D4037"
+            >
+              Pozdrawiam,
+            </div>
 
-                    <!-- Logo -->
-                    <td width="40%" align="right" valign="top">
-                        <a href="https://kasiadensem.pl/">
-                        <img src="https://kasiadensem.pl/wp-content/uploads/2026/08/logo_jasne.png"
-                             width="220"
-                             alt="Manufaktura Królowej"
-                             style="display:block;border:0;">
-                        </a>
-                    </td>
 
-                </tr>
+            <div
+              style="font-size:22px;font-weight:bold;color:#0D4037"
+            >
+              ${imie}
+            </div>
 
-            </table>
 
-        </td>
-    </tr>${banerBlock}
+            <div
+              style="font-size:15px;color:#B38E43;padding-top:3px;padding-bottom:18px;"
+            >
+              ${stanowisko}
+            </div>
 
-    <!-- Linia -->
 
-    <tr>
-        <td style="border-top:1px solid #B38E43;"></td>
-    </tr>
+            ${telefonBlock}
 
-    <!-- Klauzula -->
 
-    <tr>
+            <!-- E-mail -->
 
-        <td style="padding-top:15px;
-                   font-size:11px;
-                   line-height:18px;
-                   color:#777777;">
+            <div style="padding-bottom:6px;">
 
-            Niniejsza wiadomość oraz wszelkie załączniki są przeznaczone wyłącznie
-            dla adresata i mogą zawierać informacje poufne. Jeżeli otrzymali
-            Państwo tę wiadomość omyłkowo, prosimy o jej usunięcie oraz
-            poinformowanie nadawcy.
+              <a
+                href="mailto:${emailFull}"
+                style="color:#0D4037;text-decoration:none;"
+              >
+                ${emailFull}
+              </a>
 
-        </td>
+            </div>
 
-    </tr>
+
+            <!-- Strona WWW -->
+
+            <div style="padding-bottom:15px;">
+
+              <a
+                href="https://kasiadensem.pl/"
+                target="_blank"
+                style="color:#0D4037;text-decoration:none;"
+              >
+                www.kasiadensem.pl
+              </a>
+
+            </div>
+
+
+            <!-- Social media -->
+
+            <div
+              style="display:flex;align-items:center;gap:10px;"
+            >
+
+
+              <!-- Facebook -->
+
+              <a
+                href="https://www.facebook.com/kasieniawyrwas"
+                target="_blank"
+                style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:4px;text-decoration:none;line-height:1;margin-right:10px;"
+              >
+
+                <img
+                  src="https://kasiadensem.pl/wp-content/uploads/2026/08/facebook_tlo.png"
+                  width="32"
+                  height="32"
+                  alt="Facebook"
+                  style="display:block;border:0;border-radius:4px;"
+                >
+
+              </a>
+
+
+              <!-- Instagram -->
+
+              <a
+                href="https://www.instagram.com/kasiadensem"
+                target="_blank"
+                style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:4px;text-decoration:none;line-height:1;margin-right:10px;"
+              >
+
+                <img
+                  src="https://kasiadensem.pl/wp-content/uploads/2026/08/instagram_tlo.png"
+                  width="32"
+                  height="32"
+                  alt="Instagram"
+                  style="display:block;border:0;border-radius:4px;"
+                >
+
+              </a>
+
+
+              <!-- TikTok -->
+
+              <a
+                href="https://www.tiktok.com/@kasia.densem"
+                target="_blank"
+                style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:4px;text-decoration:none;line-height:1;margin-right:10px;"
+              >
+
+                <img
+                  src="https://kasiadensem.pl/wp-content/uploads/2026/08/tiktok_tlo-1.png"
+                  width="32"
+                  height="32"
+                  alt="TikTok"
+                  style="display:block;border:0;border-radius:4px;"
+                >
+
+              </a>
+
+
+            </div>
+
+          </td>
+
+
+          <!-- Logo -->
+
+          <td
+            width="40%"
+            align="right"
+            valign="top"
+          >
+
+            <a
+              href="https://kasiadensem.pl/"
+              target="_blank"
+            >
+
+              <img
+                src="https://kasiadensem.pl/wp-content/uploads/2026/08/logo_jasne.png"
+                width="220"
+                alt="Manufaktura Królowej"
+                style="display:block;border:0;"
+              >
+
+            </a>
+
+          </td>
+
+
+        </tr>
+
+      </table>
+
+    </td>
+
+  </tr>
+
+
+  ${banerBlock}
+
+
+  <!-- Linia -->
+
+  <tr>
+
+    <td
+      style="border-top:1px solid #B38E43;"
+    ></td>
+
+  </tr>
+
+
+  <!-- Klauzula -->
+
+  <tr>
+
+    <td
+      style="
+        padding-top:15px;
+        font-size:11px;
+        line-height:18px;
+        color:#777777;
+      "
+    >
+
+      Niniejsza wiadomość oraz wszelkie załączniki są przeznaczone wyłącznie
+      dla adresata i mogą zawierać informacje poufne. Jeżeli otrzymali
+      Państwo tę wiadomość omyłkowo, prosimy o jej usunięcie oraz
+      poinformowanie nadawcy.
+
+    </td>
+
+  </tr>
+
 
 </table>
 
 </body>
+
 </html>`;
+
 }
+
 
 function updatePreview() {
+
   const html = buildHtml();
+
   document.getElementById('preview').srcdoc = html;
+
 }
 
+
 document.querySelectorAll('input').forEach(el => {
-  el.addEventListener('input', updatePreview);
-  el.addEventListener('change', updatePreview);
+
+  el.addEventListener(
+    'input',
+    updatePreview
+  );
+
+  el.addEventListener(
+    'change',
+    updatePreview
+  );
+
 });
 
-document.getElementById('brakTelefonu').addEventListener('change', function() {
-  document.getElementById('telefon').disabled = this.checked;
-});
 
-document.getElementById('banerSelect').addEventListener('change', updatePreview);
+document
+  .getElementById('brakTelefonu')
+  .addEventListener(
+    'change',
+    function() {
+
+      document
+        .getElementById('telefon')
+        .disabled = this.checked;
+
+    }
+  );
+
+
+document
+  .getElementById('banerSelect')
+  .addEventListener(
+    'change',
+    updatePreview
+  );
+
 
 populateBannerSelect();
+
 updatePreview();
+
 </script>
 
 </body>
