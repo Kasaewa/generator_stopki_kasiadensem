@@ -86,7 +86,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-top: 14px;
+    margin-top: 8px;
   }
 
   .checkbox-row label {
@@ -169,10 +169,9 @@
       <option value="Marketing">
     </datalist>
 
-
     <div class="checkbox-row">
-      <input type="checkbox" id="brakTelefonu">
-      <label for="brakTelefonu">Brak numeru telefonu</label>
+      <input type="checkbox" id="brakStanowiska">
+      <label for="brakStanowiska">Brak stanowiska</label>
     </div>
 
 
@@ -184,6 +183,11 @@
       placeholder="+48 123 456 789"
       value="+48 123 456 789"
     >
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="brakTelefonu">
+      <label for="brakTelefonu">Brak numeru telefonu</label>
+    </div>
 
 
     <label for="email">Adres e-mail</label>
@@ -367,6 +371,9 @@ function buildHtml() {
     );
 
 
+  const brakStanowiska =
+    document.getElementById('brakStanowiska').checked;
+
   const stanowisko =
     escapeHtml(
       document.getElementById('stanowisko').value.trim() ||
@@ -409,6 +416,20 @@ function buildHtml() {
 
   const dodajBaner =
     !!wybranyBaner;
+
+
+  // ===== STANOWISKO =====
+
+  const stanowiskoBlock =
+    brakStanowiska
+      ? ''
+      : `
+            <div
+              style="font-size:15px;color:#B38E43;padding-top:3px;padding-bottom:18px;"
+            >
+              ${stanowisko}
+            </div>
+      `;
 
 
   // ===== TELEFON =====
@@ -526,11 +547,7 @@ function buildHtml() {
             </div>
 
 
-            <div
-              style="font-size:15px;color:#B38E43;padding-top:3px;padding-bottom:18px;"
-            >
-              ${stanowisko}
-            </div>
+            ${stanowiskoBlock}
 
 
             ${telefonBlock}
@@ -746,6 +763,20 @@ document
 
       document
         .getElementById('telefon')
+        .disabled = this.checked;
+
+    }
+  );
+
+
+document
+  .getElementById('brakStanowiska')
+  .addEventListener(
+    'change',
+    function() {
+
+      document
+        .getElementById('stanowisko')
         .disabled = this.checked;
 
     }
