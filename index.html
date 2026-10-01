@@ -295,7 +295,9 @@ async function fetchBannerListFromGitHub() {
           .replace(/\.[^.]+$/, '')
           .replace(/[_-]/g, ' '),
 
-        link: 'https://manufakturakrolowej.pl',
+        link: f.name === 'stopka_lip_balm.png'
+          ? 'https://kasiadensem.pl/produkt/lip-queen-balsam-do-ust/'
+          : 'https://manufakturakrolowej.pl',
 
         src: f.download_url
       }));
